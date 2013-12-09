@@ -22,6 +22,9 @@
                 <constant>someBody</constant>
             </setBody>
             <aggregate strategyRef="aggregatorStrategy">
+                <correlationExpression>
+                    <constant>true</constant>
+                </correlationExpression>
                 <completionTimeout>
                     <simple>${properties:timeout}</simple>
                 </completionTimeout>
