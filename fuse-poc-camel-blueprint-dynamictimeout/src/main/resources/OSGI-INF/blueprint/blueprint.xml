@@ -9,7 +9,7 @@
 
     <cm:property-placeholder id="myblueprint.placeholder" persistent-id="camel.blueprint">
         <cm:default-properties>
-            <cm:property name="timeout" value="1000"/>
+            <cm:property name="timeout" value="100"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -17,7 +17,7 @@
 
     <camelContext id="blueprintContext" trace="false" xmlns="http://camel.apache.org/schema/blueprint">
         <route>
-            <from uri="timer:foo?period=5000"/>
+            <from uri="timer:foo?period=1000"/>
             <setBody>
                 <constant>someBody</constant>
             </setBody>
