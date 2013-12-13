@@ -1,4 +1,4 @@
-fuse-pocs
+JBoss Fusee proof of concept - Dynamic aggregation timeout with Camel and Blueprint
 =========
 
-Proof of concepts for idiomatic usage of JBoss Fuse technologies
+In this example we use Blueprint properties to dynamically set aggregation timeout. This feature allows user to set completion timeout value in Karaf/ServiceMix properties (and change it at runtime).
