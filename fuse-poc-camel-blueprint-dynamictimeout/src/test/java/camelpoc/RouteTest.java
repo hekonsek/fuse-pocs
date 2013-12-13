@@ -1,9 +1,14 @@
 package camelpoc;
 
+import org.apache.camel.EndpointInject;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 import org.junit.Test;
 
 public class RouteTest extends CamelBlueprintTestSupport {
+
+    @EndpointInject(uri = "mock:result")
+    MockEndpoint mockEndpoint;
 
     @Override
     protected String getBlueprintDescriptor() {
@@ -13,8 +18,8 @@ public class RouteTest extends CamelBlueprintTestSupport {
     @Test
     public void shouldReceiveAggregatedMessage() throws Exception {
         // Given
-        getMockEndpoint("mock:result").expectedMinimumMessageCount(1);
-        getMockEndpoint("mock:result").message(0).body().isEqualTo("someBody");
+        mockEndpoint.expectedMinimumMessageCount(1);
+        mockEndpoint.message(0).body().isEqualTo("someBody");
 
         // Then
         assertMockEndpointsSatisfied();
