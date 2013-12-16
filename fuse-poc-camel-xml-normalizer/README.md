@@ -1,4 +1,4 @@
-JBoss Fuse proof of concept - Dynamic aggregation timeout with Camel and Blueprint
+JBoss Fuse proof of concept - Normalizing XML message before tokenizing 
 =========
 
-In this example we use Blueprint properties to dynamically set aggregation timeout. This feature allows user to set completion timeout value in Karaf/ServiceMix properties (and change it at runtime).
+This example demonstrates how to transfer XML message before further processing (splitting for instance). In this particular example we remove newlines from within XML elements in order to provide workaround for [MR-785](https://issues.jboss.org/browse/MR-785) i.e. invalid handling of such newlines `split().tokenizeXML()` element of Camel DSL.
