@@ -16,7 +16,9 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     public void savePerson(Person person) {
+//        EntityTransaction tx = em.getTransaction();
         getEm().persist(person);
+//        tx.commit();
     }
 
     public EntityManager getEm() {

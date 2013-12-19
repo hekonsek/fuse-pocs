@@ -10,8 +10,14 @@ import org.ops4j.pax.exam.junit.PaxExam;
 import javax.inject.Inject;
 import java.io.File;
 
-import static org.ops4j.pax.exam.CoreOptions.*;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
+import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 //import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 //import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel.INFO;
@@ -60,16 +66,7 @@ public class PersonServiceTest extends Assert {
                         maven().groupId("org.apache.karaf.assemblies.features").artifactId("standard").type("xml")
                                 .classifier("features").version("2.3.3"), "jndi", "transaction", "jpa"),
 
-//                mavenBundle("org.apache.aries.jpa","org.apache.aries.jpa.container.context","1.0.0"),
-//                mavenBundle("org.apache.aries.jpa","org.apache.aries.jpa.blueprint.aries","1.0.0"),
-//                mavenBundle("org.apache.aries.jpa","org.apache.aries.jpa.container","1.0.0"),
-//                mavenBundle("javax.transaction","javax.transaction-api","1.2"),
-//                wrappedBundle(mavenBundle("javax.enterprise","cdi-api","1.1")),
-//                wrappedBundle(mavenBundle("javax.interceptor","javax.interceptor-api","1.2")),
-
-//                mavenBundle().groupId("org.eclipse.persistence").artifactId("javax.persistence").version("2.0.0"),
-//                wrappedBundle(mavenBundle("org.eclipse.persistence","eclipselink","2.5.1")),
-                mavenBundle("org.hsqldb", "hsqldb", "2.3.0"),
+                mavenBundle("org.hsqldb", "hsqldb", "2.3.1"),
                 mavenBundle("org.apache.commons", "commons-lang3", "3.1"),
                 mavenBundle("com.google.guava", "guava", "15.0"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.asm", "2.4.2"),
@@ -88,28 +85,6 @@ public class PersonServiceTest extends Assert {
 
                 junitBundles(),
 //                debugConfiguration("8889", true)
-//                karafDistributionConfiguration()
-//                        .frameworkUrl(
-//                                maven()
-//                                        .groupId("org.apache.karaf")
-//                                        .artifactId("apache-karaf")
-//                                        .type("tar.gz")
-//                                        .version("2.3.0")
-//                        )
-//                        .karafVersion("2.3.0")
-//                        .name("Apache Karaf")
-//                        .unpackDirectory(new File("target/paxexam/unpack")),
-//                keepRuntimeFolder(),
-//                logLevel(INFO),
-//                configureConsole().ignoreRemoteShell().ignoreLocalConsole(),
-                // Add apache-snapshots repository
-//                editConfigurationFilePut("etc/org.ops4j.pax.url.mvn.cfg", "org.ops4j.pax.url.mvn.repositories",
-//                        "http://repo1.maven.org/maven2@id=central, "
-//                                + "http://svn.apache.org/repos/asf/servicemix/m2-repo@id=servicemix, "
-//                                + "http://repository.springsource.com/maven/bundles/release@id=springsource.release, "
-//                                + "http://repository.springsource.com/maven/bundles/external@id=springsource.external, "
-//                                + "http://oss.sonatype.org/content/repositories/releases/@id=sonatype, "
-//                                + "http://repository.apache.org/content/groups/snapshots-group@snapshots@noreleases@id=apache")
 
         };
     }

@@ -4,8 +4,10 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="personService" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/userManagerDS)</jta-data-source>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-data-source>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</non-jta-data-source>
         <class>fuse.poc.blueprint.eclipselink.Person</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <!--<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>-->
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb"/>-->
@@ -14,6 +16,10 @@
             <property name="eclipselink.weaving" value="false"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <!--<property-->
+            <!--name = "eclipselink.logging.logger"-->
+            <!--value = "com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>-->
         </properties>
     </persistence-unit>
 </persistence>
