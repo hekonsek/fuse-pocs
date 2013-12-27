@@ -1,0 +1,6 @@
+<Parent>
+    <Child A="1"
+           B="2">
+        <ChildValue/>
+    </Child>
+</Parent>
