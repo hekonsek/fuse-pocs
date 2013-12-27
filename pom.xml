@@ -15,6 +15,8 @@
         <module>fuse-poc-camel-jms</module>
         <module>fuse-poc-camel-json-map-simple</module>
         <module>fuse-poc-camel-xml-normalizer</module>
+        <module>fuse-pocs-blueprint-lists</module>
+        <module>fuse-pocs-blueprint-lists-itest</module>
     </modules>
 
 </project>
