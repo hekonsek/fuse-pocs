@@ -50,6 +50,7 @@ public class SpringPropertiesTest extends Assert {
                                 type("xml").classifier("features").versionAsInProject(),
                         "camel-spring"),
 
+                // Tested module
                 mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-camel-spring-properties-bundle").versionAsInProject(),
         };
     }
