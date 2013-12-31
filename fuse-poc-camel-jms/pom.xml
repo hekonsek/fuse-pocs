@@ -22,14 +22,14 @@
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-broker</artifactId>
-            <version>5.9.0</version>
+            <artifactId>activemq-all</artifactId>
+            <version>5.6.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-kahadb-store</artifactId>
-            <version>5.9.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.activemq</groupId>-->
+        <!--<artifactId>activemq-kahadb-store</artifactId>-->
+        <!--<version>5.6.0</version>-->
+        <!--</dependency>-->
 
         <!-- logging -->
         <dependency>

@@ -2,7 +2,7 @@ package fuse.pocs.camel.xml.normalizer;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
-import org.apache.camel.Consume;
+import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -13,9 +13,11 @@ import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.CachingConnectionFactory;
@@ -32,16 +34,16 @@ import java.util.List;
         classes = {Config.class},
         loader = CamelSpringDelegatingTestContextLoader.class
 )
-public class XmlNormalizationTest {
+public class JmsConsumerTests {
 
     @Produce(uri = "jms:queue:jobQueue")
     protected ProducerTemplate testProducer;
 
-    @Consume
-    protected ConsumerTemplate consumer;
-
     @EndpointInject(uri = "mock:xxx")
     MockEndpoint mockEndpoint;
+
+    @Autowired
+    CamelContext camelContext;
 
     static int count = 100;
 
@@ -55,31 +57,54 @@ public class XmlNormalizationTest {
             messages.add("m" + i);
         }
 
-        broker = new BrokerService();
-        broker.addConnector("tcp://localhost:61616");
-        broker.start();
+//        Runtime.getRuntime().exec(new String[]{"rm", "-rf", "/home/hkonsek/projects/fuse-pocs/activemq-data/localhost/KahaDB"}).waitFor();
+//        broker = new BrokerService();
+//        broker.setBrokerName("localhost");
+//        broker.setPersistent(false);
+////        broker.addConnector("tcp://localhost:61616");
+//        broker.start();
     }
 
     @AfterClass
     static public void teardown() throws Exception {
-        broker.stop();
+//        broker.stop();
+//        broker.waitUntilStopped();
     }
 
+
+    @Autowired
+    ConsumerTemplate consumerTemplate;
+
     @Test
-    public void should() throws InterruptedException {
-//        mockEndpoint.expectedMessageCount(messages.size());
-//        for(int i = 0; i < messages.size();i++) {
-//            mockEndpoint.message(i).body().isEqualTo(messages.get(i));
-//        }
-        ConsumerTemplate consumer = testProducer.getCamelContext().createConsumerTemplate();
-        testProducer.sendBody("msg");
-//        mockEndpoint.assertIsSatisfied(TimeUnit.MINUTES.toMillis(2));
-        for (int i = 0; i < 1000000; i++) {
-            Object o = consumer.receiveBodyNoWait("jms:queue:destinationQueue");
-            if (o != null) {
-                System.out.println("XXX" + o);
-            }
+    public void should() throws Exception {
+
+        mockEndpoint.expectedMessageCount(messages.size());
+        for (int i = 0; i < messages.size(); i++) {
+            mockEndpoint.message(i).body().isEqualTo(messages.get(i));
         }
+
+
+//        for(int i = 0; i < messages.size();i++) {
+//            testProducer.sendBody("jms:queue:destinationQueue", messages.get(i));
+//
+//        }
+
+//                testProducer.sendBody("direct:start", "xxx");
+        consumerTemplate = camelContext.createConsumerTemplate();
+        testProducer.sendBody("jms:queue:jobQueue", "xxx");
+
+        int m = 0;
+        while (m < count) {
+//            consumerTemplate.receiveBody("jms:queue:destinationQueue");
+            Object msg = consumerTemplate.receiveBodyNoWait("jms:queue:destinationQueue");
+            if (msg != null) {
+                Assert.assertEquals(messages.get(m), msg);
+                m++;
+            }
+//            Thread.sleep(50);
+        }
+
+//        mockEndpoint.assertIsSatisfied(TimeUnit.MINUTES.toMillis(5));
     }
 
 }
@@ -87,9 +112,19 @@ public class XmlNormalizationTest {
 @Configuration
 class Config extends SingleRouteCamelConfiguration {
 
+    @Autowired
+    CamelContext camelContext;
+
+    @Bean
+    ConsumerTemplate consumerTemplate() throws Exception {
+        ConsumerTemplate consumerTemplate = camelContext.createConsumerTemplate();
+        consumerTemplate.start();
+        return consumerTemplate;
+    }
+
     @Bean
     ConnectionFactory connectionFactory() {
-        return new ActiveMQConnectionFactory();
+        return new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
     }
 
     @Bean
@@ -108,10 +143,13 @@ class Config extends SingleRouteCamelConfiguration {
             @Override
             public void configure() throws Exception {
                 from("jms:queue:jobQueue")
-//                        .transacted()
-                        .setBody().constant(XmlNormalizationTest.messages).
+                        .transacted()
+                        .setBody().constant(JmsConsumerTests.messages).
                         split(body())
                         .to("jms:queue:destinationQueue");
+
+                from("direct:start").setBody().constant(JmsConsumerTests.messages).
+                        split(body()).to("jms:queue:destinationQueue");
 
 //                from("jms:queue:destinationQueue").to("mock:xxx");
             }
