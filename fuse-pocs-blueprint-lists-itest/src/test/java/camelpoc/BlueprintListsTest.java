@@ -44,14 +44,14 @@ public class BlueprintListsTest extends Assert {
 
                 logLevel(LogLevel.INFO),
 
-                mavenBundle().groupId("fuse-pocs").artifactId("fuse-poc-blueprint-lists").version("1.0-SNAPSHOT"),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-lists").version("1.0-SNAPSHOT"),
         };
     }
 
     @Test
     public void shouldInjectSingletonList() {
         // Then
-        assertEquals(Arrays.asList("foo", "bar"), tokens);
+        assertEquals(Arrays.asList("fooValue", "barValue"), tokens);
     }
 
 }

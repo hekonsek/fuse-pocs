@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+
+       http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd">
 
     <bean id="tokens" class="java.util.Arrays" factory-method="asList">
         <argument>
             <array>
-                <value>foo</value>
-                <value>bar</value>
+                <value>${foo}</value>
+                <value>${bar}</value>
             </array>
         </argument>
     </bean>
 
     <service interface="java.util.List" ref="tokens"/>
+
+    <!-- Properties configuration -->
+
+    <cm:property-placeholder id="myblueprint.placeholder" persistent-id="my.persistent.id">
+        <cm:default-properties>
+            <cm:property name="foo" value="fooValue"/>
+            <cm:property name="bar" value="barValue"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
 
 </blueprint>
