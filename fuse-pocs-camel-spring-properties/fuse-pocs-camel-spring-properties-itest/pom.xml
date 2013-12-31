@@ -12,11 +12,6 @@
     </parent>
     <artifactId>fuse-pocs-camel-spring-properties-itest</artifactId>
 
-    <properties>
-        <exam-version>3.3.0</exam-version>
-        <karaf-version>3.3.</karaf-version>
-    </properties>
-
     <dependencies>
         <!-- Testing -->
 

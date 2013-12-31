@@ -14,6 +14,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <camel-version>2.12.2</camel-version>
+        <exam-version>3.3.0</exam-version>
+        <karaf-version>3.3.</karaf-version>
     </properties>
 
     <modules>
