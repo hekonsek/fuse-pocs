@@ -1,7 +1,5 @@
 include "jpa-common"
 include "jpa-eclipselink-adapter"
 include "jpa-openjpa"
-include "jpa-hibernate"
-include "jpa-hibernate-noaries"
 include "jpa-batoojpa"
 
