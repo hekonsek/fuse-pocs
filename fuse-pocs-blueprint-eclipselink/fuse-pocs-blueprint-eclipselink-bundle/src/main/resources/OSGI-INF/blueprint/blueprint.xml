@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint default-activation="eager"
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-           xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+           xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
     <bean id="data_source_hsql" class="org.hsqldb.jdbc.JDBCDataSource">
@@ -19,7 +19,7 @@
 
     <bean id="con_managed_data_service"
           class="fuse.pocs.blueprint.eclipselink.DefaultPersonService">
-        <jpa:context unitname="DATA_ELINK_JTA" property="entityManager"/>
+        <jpa:context unitname="DATA_ELINK_JTA"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 

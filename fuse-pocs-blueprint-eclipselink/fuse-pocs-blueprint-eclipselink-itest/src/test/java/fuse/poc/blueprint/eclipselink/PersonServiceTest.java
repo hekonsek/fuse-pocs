@@ -55,7 +55,7 @@ public class PersonServiceTest extends Assert {
                 logLevel(LogLevel.INFO),
 
                 features(
-                        maven().groupId("org.apache.karaf.assemblies.features").artifactId("standard").type("xml")
+                        maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
                 mavenBundle("org.hsqldb", "hsqldb", "2.3.1"),

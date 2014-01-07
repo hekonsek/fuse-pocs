@@ -5,10 +5,7 @@ import java.util.List;
 
 public class DefaultPersonService implements PersonService {
 
-    private EntityManager entityManager;
-
-    public DefaultPersonService() {
-    }
+    private final EntityManager entityManager;
 
     public DefaultPersonService(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -36,10 +33,5 @@ public class DefaultPersonService implements PersonService {
         }
         return people.get(0);
     }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
 
 }
