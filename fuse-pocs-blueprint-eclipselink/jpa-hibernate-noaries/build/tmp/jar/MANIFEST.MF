@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Export-Package: com.github.lburgazzoli.examples.karaf.jpa.hibernate.no
+ aries.cmd;uses:="com.github.lburgazzoli.examples.karaf.jpa.commons.da
+ ta,com.github.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data,o
+ rg.apache.felix.gogo.commands,org.apache.karaf.shell.console",com.git
+ hub.lburgazzoli.examples.karaf.jpa.hibernate.noaries.data;uses:="com.
+ github.lburgazzoli.examples.karaf.jpa.commons.data,com.github.lburgaz
+ zoli.karaf.common,javax.persistence,javax.persistence.spi"
+Implementation-Title: karaf-examples-jpa-hibernate-noaries-1.0.0.SNAPS
+ HOT
+Implementation-Version: 1.0.0.SNAPSHOT
+Tool: Bnd-2.1.0.20130426-122213
+Bundle-Name: karaf-examples :: jpa-hibernate-noaries
+Created-By: 1.7.0_45 (Oracle Corporation)
+Meta-Persistence: META-INF/persistence.xml
+JPA-PersistenceUnits: DATA_HIBERNATE_NOA
+Implementation-Vendor: lb
+Bundle-Version: 1.0.0.SNAPSHOT
+Bnd-LastModified: 1389110845000
+Bundle-ManifestVersion: 2
+Bundle-Description: karaf-examples :: jpa-hibernate-noaries
+Bundle-SymbolicName: karaf-examples-jpa-hibernate-noaries
+Import-Package: org.apache.felix.gogo.commands;version="[0.10,1)",org.
+ apache.karaf.shell.console;version="[2.3,3)",javax.persistence;versio
+ n="[1.1,2)",com.github.lburgazzoli.examples.karaf.jpa.commons.data,co
+ m.github.lburgazzoli.karaf.common,com.google.common.collect;version="
+ [15.0,16)",javax.persistence.spi;version="[1.1,2)",org.slf4j;version=
+ "[1.7,2)",javassist.util.proxy,org.hibernate.proxy,org.hsqldb,org.hsq
+ ldb.jdbc,org.apache.felix.service.command;version="[0.10,1)";status=p
+ rovisional
+

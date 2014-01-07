@@ -1,0 +1,34 @@
+project.ext {
+    bundleInportPackages = [
+            'org.apache.felix.service.command',
+            'org.apache.felix.gogo.commands',
+            'org.apache.karaf.shell.console',
+            'javax.persistence',
+            'org.hibernate.proxy',
+            'javassist.util.proxy',
+            'org.hsqldb.jdbc',
+            'org.hsqldb',
+            '*'
+    ]
+
+    bundleExportPackages = [
+            '*'
+    ]
+}
+
+dependencies {
+    compile 'com.github.lburgazzoli:karaf-examples-jpa-common:1.0.0.SNAPSHOT'
+
+}
+
+jar {
+    manifest {
+        instruction 'Import-Package', bundleInportPackages.join(',')
+        instruction 'Export-Package', bundleExportPackages.join(',')
+
+        attributes['JPA-PersistenceUnits'] = 'DATA_HIBERNATE_NOA'
+        attributes['Meta-Persistence'] = 'META-INF/persistence.xml'
+    }
+}
+
+

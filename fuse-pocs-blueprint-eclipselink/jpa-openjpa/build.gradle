@@ -1,0 +1,40 @@
+project.ext {
+    bundleInportPackages = [
+            'org.apache.felix.service.command',
+            'org.apache.felix.gogo.commands',
+            'org.apache.karaf.shell.console',
+            '*'
+    ]
+
+    bundleExportPackages = [
+            "*"
+    ]
+}
+
+dependencies {
+    compile 'com.github.lburgazzoli:karaf-examples-jpa-common:1.0.0.SNAPSHOT'
+    compile 'org.apache.openjpa:openjpa:2.2.2'
+}
+
+task enhance << {
+    ant.taskdef(
+            name: 'openjpaenhancer',
+            classpath: project.runtimeClasspath.asPath,
+            classname: 'org.apache.openjpa.ant.PCEnhancerTask'
+    )
+
+    ant.openjpaenhancer(
+            classpath: project.runtimeClasspath.asPath)
+}
+
+jar {
+    it.dependsOn enhance
+
+    manifest {
+        instruction 'Import-Package', bundleInportPackages.join(',')
+        instruction 'Export-Package', bundleExportPackages.join(',')
+
+        attributes['JPA-PersistenceUnits'] = 'DATA_OPENJPA,DATA_OPENJPA_JTA'
+        attributes['Meta-Persistence'] = 'META-INF/persistence.xml'
+    }
+}
