@@ -1,4 +1,2 @@
 include "jpa-eclipselink-adapter"
-include "jpa-openjpa"
-include "jpa-batoojpa"
 
