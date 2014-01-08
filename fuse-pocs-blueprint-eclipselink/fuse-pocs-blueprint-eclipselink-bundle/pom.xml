@@ -52,9 +52,6 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>karaf-examples-jpa-eclipselink</Bundle-SymbolicName>
-                        <Import-Package>'com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter',
-                            '*'
-                        </Import-Package>
                         <Export-Package>fuse.pocs.blueprint.eclipselink</Export-Package>
                         <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                         <JPA-PersistenceUnits>DATA_ELINK,DATA_ELINK_JTA</JPA-PersistenceUnits>

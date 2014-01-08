@@ -27,10 +27,10 @@
 
             <property
                     name="eclipselink.logging.logger"
-                    value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>
+                    value="fuse.pocs.blueprint.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>
             <property
                     name="eclipselink.target-server"
-                    value="com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter.EclipseLinkOSGiServerPlatform"/>
+                    value="fuse.pocs.blueprint.eclipselink.adapter.EclipseLinkOSGiServerPlatform"/>
 
         </properties>
     </persistence-unit>

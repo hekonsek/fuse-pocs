@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter;
+package fuse.pocs.blueprint.eclipselink.adapter;
 
 import org.eclipse.persistence.transaction.JTATransactionController;
 import org.osgi.framework.Bundle;
