@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+    <reference id="persistenceProvider" interface="javax.persistence.spi.PersistenceProvider"/>
+
+    <bean id="entityManagerfactory" class="fuse.pocs.blueprint.hibernate.raw.EntityManagerFactoryBuilder"
+          factory-method="build">
+        <argument ref="persistenceProvider"/>
+    </bean>
+
+    <bean id="defaultPersonService" class="fuse.pocs.blueprint.hibernate.raw.DefaultPersonService">
+        <argument ref="entityManagerfactory"/>
+    </bean>
+
+    <service id="personService" interface="fuse.pocs.blueprint.hibernate.raw.PersonService"
+             ref="defaultPersonService"/>
+
+</blueprint>

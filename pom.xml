@@ -18,6 +18,7 @@
         <module>fuse-pocs-camel-spring-properties</module>
         <module>fuse-pocs-blueprint-lists</module>
         <module>fuse-pocs-blueprint-lists-itest</module>
+        <module>fuse-pocs-blueprint-hibernate-raw</module>
     </modules>
 
 </project>
