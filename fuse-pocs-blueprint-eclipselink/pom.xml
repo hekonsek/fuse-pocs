@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>fuse-pocs-blueprint-eclipselink-adapter</module>
         <module>fuse-pocs-blueprint-eclipselink-bundle</module>
         <module>fuse-pocs-blueprint-eclipselink-itest</module>
     </modules>

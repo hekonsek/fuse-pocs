@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fuse-pocs</groupId>
+    <artifactId>fuse-pocs-blueprint-eclipselink-adapter</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+
+    <properties>
+        <camel.version>2.12.2</camel.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- to generate the MANIFEST-FILE of the bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+                        <JPA-PersistenceUnits>DATA_ELINK,DATA_ELINK_JTA</JPA-PersistenceUnits>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>EclipseLink Repo</id>
+            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>x</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>x1</id>
+            <url>http://repo2.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>x2</id>
+            <url>http://repo.springsource.org/release</url>
+        </repository>
+        <!--maven { url 'http://repository.springsource.com/maven/bundles/release' }-->
+        <!--maven { url 'http://repository.springsource.com/maven/bundles/external' }-->
+        <!--maven { url 'http://download.oracle.com/maven' }-->
+        <!--maven { url 'https://oss.sonatype.org/content/repositories/releases' }-->
+        <repository>
+            <id>x3</id>
+            <url>http://mvn.riptano.com/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>x4</id>
+            <url>http://kundera.googlecode.com/svn/maven2/maven-missing-resources</url>
+        </repository>
+        <repository>
+            <id>x5</id>
+            <url>http://repository.apache.org/content/groups/snapshots-group</url>
+        </repository>
+    </repositories>
+
+</project>

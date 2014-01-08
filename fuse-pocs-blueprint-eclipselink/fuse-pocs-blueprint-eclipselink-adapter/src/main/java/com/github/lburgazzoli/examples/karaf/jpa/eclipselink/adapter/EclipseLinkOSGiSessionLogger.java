@@ -16,14 +16,13 @@
  */
 package com.github.lburgazzoli.examples.karaf.jpa.eclipselink.adapter;
 
-import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.persistence.logging.AbstractSessionLog;
 import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.logging.SessionLogEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,7 +31,7 @@ import java.util.Map;
 public class EclipseLinkOSGiSessionLogger extends AbstractSessionLog implements SessionLog
 {
     private static final Logger LOGGER  = LoggerFactory.getLogger("ECLIPSELINK");
-    private static final Map<String,Logger> LOGGERS = Maps.newHashMap();
+    private static final Map<String, Logger> LOGGERS = new HashMap<String, Logger>();
 
     /**
      * c-tor
@@ -58,7 +57,7 @@ public class EclipseLinkOSGiSessionLogger extends AbstractSessionLog implements 
         Logger lg  = getLogger(sle);
         String msg = getMessage(sle);
 
-        if(lg != null && StringUtils.isNotBlank(msg)) {
+        if (lg != null && msg != null && !msg.isEmpty()) {
             switch(sle.getLevel()) {
                 case SessionLog.SEVERE  : lg.error(msg); break;
                 case SessionLog.WARNING : lg.warn (msg); break;
@@ -92,7 +91,7 @@ public class EclipseLinkOSGiSessionLogger extends AbstractSessionLog implements 
      */
     private Logger getLogger(SessionLogEntry sle) {
         String ns = sle.getNameSpace();
-        if(StringUtils.isNotBlank(ns)) {
+        if (ns != null && !ns.isEmpty()) {
             ns = ns.toUpperCase();
 
             if(!LOGGERS.containsKey(ns)) {

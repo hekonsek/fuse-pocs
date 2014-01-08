@@ -14,7 +14,6 @@ import org.osgi.framework.BundleContext;
 import javax.inject.Inject;
 import java.io.File;
 
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
@@ -59,24 +58,15 @@ public class PersonServiceTest extends Assert {
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
                 mavenBundle("org.hsqldb", "hsqldb", "2.3.1"),
-                mavenBundle("org.apache.commons", "commons-lang3", "3.1"),
-                mavenBundle("com.google.guava", "guava", "15.0"),
+
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.asm", "2.4.2"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.antlr", "2.4.2"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa.jpql", "2.4.2"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.core", "2.4.2"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa", "2.4.2"),
 
-//                provision("file:///NotBackedUp/hkonsek/labs/apache-karaf-2.3.3/deploy/blueprint.xml"),
-
-////
-                mavenBundle("com.github.lburgazzoli", "karaf-examples-jpa-common", "1.0.0.SNAPSHOT"),
-                mavenBundle("com.github.lburgazzoli", "karaf-examples-jpa-eclipselink-adapter", "1.0.0.SNAPSHOT"),
+                mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-adapter", "0.1-SNAPSHOT"),
                 mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-bundle", "0.1-SNAPSHOT"),
-
-                junitBundles(),
-//                debugConfiguration("8889", true)
-
         };
     }
 
