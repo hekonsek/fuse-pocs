@@ -16,5 +16,11 @@
         <module>fuse-pocs-blueprint-eclipselink-itest</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>EclipseLink Repo</id>
+            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+        </repository>
+    </repositories>
 
 </project>

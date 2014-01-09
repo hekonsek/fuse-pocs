@@ -65,8 +65,8 @@ public class PersonServiceTest extends Assert {
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.core", "2.4.2"),
                 mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa", "2.4.2"),
 
-                mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-adapter", "0.1-SNAPSHOT"),
-                mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-bundle", "0.1-SNAPSHOT"),
+                mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-adapter", "1.0-SNAPSHOT"),
+                mavenBundle("fuse-pocs", "fuse-pocs-blueprint-eclipselink-bundle", "1.0-SNAPSHOT"),
         };
     }
 

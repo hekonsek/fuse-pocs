@@ -3,9 +3,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fuse-pocs</groupId>
+    <parent>
+        <groupId>fuse-pocs</groupId>
+        <artifactId>fuse-pocs-blueprint-eclipselink</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>fuse-pocs-blueprint-eclipselink-bundle</artifactId>
-    <version>0.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <properties>
@@ -61,12 +65,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>EclipseLink-Repo</id>
-            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
-        </repository>
-    </repositories>
 
 </project>

@@ -27,7 +27,7 @@
 
             <property
                     name="eclipselink.logging.logger"
-                    value="fuse.pocs.blueprint.eclipselink.adapter.EclipseLinkOSGiSessionLogger"/>
+                    value="fuse.pocs.blueprint.eclipselink.adapter.EclipseLinkOSGiSessionLog"/>
             <property
                     name="eclipselink.target-server"
                     value="fuse.pocs.blueprint.eclipselink.adapter.EclipseLinkOSGiServerPlatform"/>
