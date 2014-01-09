@@ -31,7 +31,7 @@
                         <Bundle-SymbolicName>karaf-examples-jpa-eclipselink</Bundle-SymbolicName>
                         <Export-Package>fuse.pocs.blueprint.eclipselink</Export-Package>
                         <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
-                        <JPA-PersistenceUnits>DATA_ELINK,PERSON</JPA-PersistenceUnits>
+                        <JPA-PersistenceUnits>PERSON</JPA-PersistenceUnits>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
