@@ -7,8 +7,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         version="2.0">
 
-    <persistence-unit name="DATA_ELINK_JTA" transaction-type="JTA">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <persistence-unit name="PERSON" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-data-source>
         <class>fuse.pocs.blueprint.eclipselink.Person</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

@@ -19,7 +19,7 @@
 
     <bean id="con_managed_data_service"
           class="fuse.pocs.blueprint.eclipselink.DefaultPersonService">
-        <jpa:context unitname="DATA_ELINK_JTA"/>
+        <jpa:context unitname="PERSON"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 

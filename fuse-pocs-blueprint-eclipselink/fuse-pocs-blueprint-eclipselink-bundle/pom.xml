@@ -24,25 +24,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <!-- to generate the MANIFEST-FILE of the bundle -->
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
@@ -50,7 +31,7 @@
                         <Bundle-SymbolicName>karaf-examples-jpa-eclipselink</Bundle-SymbolicName>
                         <Export-Package>fuse.pocs.blueprint.eclipselink</Export-Package>
                         <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
-                        <JPA-PersistenceUnits>DATA_ELINK,DATA_ELINK_JTA</JPA-PersistenceUnits>
+                        <JPA-PersistenceUnits>DATA_ELINK,PERSON</JPA-PersistenceUnits>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
