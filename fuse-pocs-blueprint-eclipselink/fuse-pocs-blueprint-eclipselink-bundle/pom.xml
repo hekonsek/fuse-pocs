@@ -12,12 +12,6 @@
     <artifactId>fuse-pocs-blueprint-eclipselink-bundle</artifactId>
     <packaging>bundle</packaging>
 
-    <properties>
-        <camel.version>2.12.2</camel.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
