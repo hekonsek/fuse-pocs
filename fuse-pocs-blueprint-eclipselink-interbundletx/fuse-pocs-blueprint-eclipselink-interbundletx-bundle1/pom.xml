@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fuse-pocs</groupId>
+        <artifactId>fuse-pocs-blueprint-eclipselink-interbundletx</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fuse-pocs-blueprint-eclipselink-interbundletx-bundle1</artifactId>
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+                        <JPA-PersistenceUnits>PERSON</JPA-PersistenceUnits>
+                        <Import-Package>
+                            fuse.pocs.blueprint.eclipselink.adapter,
+                            org.eclipse.persistence.internal.weaving,
+                            org.eclipse.persistence.internal.descriptors,
+                            org.eclipse.persistence.descriptors.changetracking,
+                            org.eclipse.persistence.queries,
+                            org.eclipse.persistence.sessions,
+                            org.eclipse.persistence.internal.identitymaps,
+                            org.eclipse.persistence.internal.jpa.rs.metadata.model,
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

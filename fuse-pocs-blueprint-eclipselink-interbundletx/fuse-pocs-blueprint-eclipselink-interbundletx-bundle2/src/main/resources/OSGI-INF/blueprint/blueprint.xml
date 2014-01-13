@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
+           xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
+
+    <bean id="addressService"
+          class="fuse.pocs.blueprint.eclipselink.bundle2.DefaultAddressService">
+        <jpa:context unitname="ADDRESS"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service interface="fuse.pocs.blueprint.eclipselink.bundle2.AddressService" ref="addressService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="eclipselink/addressService"/>
+        </service-properties>
+    </service>
+
+</blueprint>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
+
+    <bean id="con_managed_data_service"
+          class="fuse.pocs.blueprint.eclipselink.composedbundle.DefaultComposedServices">
+        <argument ref="personService"/>
+        <argument ref="addressService"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service ref="con_managed_data_service"
+             interface="fuse.pocs.blueprint.eclipselink.composedbundle.ComposedService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name"
+                   value="eclipselink/composedService"/>
+        </service-properties>
+    </service>
+
+    <reference id="personService" interface="fuse.pocs.blueprint.eclipselink.bundle1.PersonService"/>
+
+    <reference id="addressService" interface="fuse.pocs.blueprint.eclipselink.bundle2.AddressService"/>
+
+</blueprint>
