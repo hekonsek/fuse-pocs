@@ -9,9 +9,9 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class DefaultComposedServices implements ComposedService {
 
-    PersonService personService;
+    private final PersonService personService;
 
-    AddressService addressService;
+    private final AddressService addressService;
 
     public DefaultComposedServices(PersonService personService, AddressService addressService) {
         this.personService = personService;
@@ -27,6 +27,7 @@ public class DefaultComposedServices implements ComposedService {
     @Override
     public void rollbackAll(Person person, Address address) {
         personService.save(person);
+        addressService.save(address);
         throw new CustomRollbackException();
     }
 
