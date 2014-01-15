@@ -4,10 +4,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fuse-pocs</groupId>
+    <parent>
+        <groupId>fuse-pocs</groupId>
+        <artifactId>fuse-pocs-blueprint-lists</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <artifactId>fuse-pocs-blueprint-lists-bundle</artifactId>
     <packaging>bundle</packaging>
-    <version>1.0-SNAPSHOT</version>
 
     <build>
         <plugins>
