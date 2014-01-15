@@ -6,6 +6,8 @@
 
        http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd">
 
+    <!-- Constant list service -->
+
     <bean id="tokens" class="java.util.Arrays" factory-method="asList">
         <argument>
             <array>
