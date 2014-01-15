@@ -18,14 +18,14 @@
     </service>
 
     <bean id="con_managed_data_service"
-          class="fuse.pocs.blueprint.eclipselink.bundle1.DefaultPersonService">
-        <jpa:context unitname="PERSON"/>
+          class="fuse.pocs.blueprint.eclipselink.DefaultPersonService">
+    <jpa:context unitname="PERSON"/>
         <tx:transaction method="*" value="Required"/>
     </bean>
 
     <service ref="con_managed_data_service"
-             interface="fuse.pocs.blueprint.eclipselink.bundle1.PersonService">
-        <service-properties>
+             interface="fuse.pocs.blueprint.eclipselink.PersonService">
+    <service-properties>
             <entry key="osgi.jndi.service.name"
                    value="eclipselink/con_managed_data_service"/>
         </service-properties>

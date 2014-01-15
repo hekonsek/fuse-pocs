@@ -10,7 +10,7 @@
     <persistence-unit name="PERSON" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DS)</jta-data-source>
-        <class>fuse.pocs.blueprint.eclipselink.bundle1.Person</class>
+        <class>fuse.pocs.blueprint.eclipselink.Person</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.logging.level" value="FINEST"/>
