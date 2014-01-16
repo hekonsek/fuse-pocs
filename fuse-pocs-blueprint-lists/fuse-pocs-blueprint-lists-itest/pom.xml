@@ -4,15 +4,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fuse-pocs</groupId>
+    <parent>
+        <groupId>fuse-pocs</groupId>
+        <artifactId>fuse-pocs-blueprint-lists</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <artifactId>fuse-pocs-blueprint-lists-itest</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <exam.version>3.3.0</exam.version>
-    </properties>
 
     <dependencies>
         <!-- We just want Maven build to fail as soon as possible if tested module has not been installed. -->
@@ -38,19 +35,19 @@
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-junit4</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-container-karaf</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-link-mvn</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
