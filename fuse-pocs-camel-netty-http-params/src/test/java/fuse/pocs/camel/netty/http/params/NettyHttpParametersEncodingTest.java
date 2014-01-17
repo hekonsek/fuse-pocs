@@ -1,8 +1,10 @@
 package fuse.pocs.camel.netty.http.params;
 
+import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
@@ -16,9 +18,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.io.IOException;
+import java.net.URL;
+
 import static fuse.pocs.camel.netty.http.params.NettyTestConfig.DECODED_HTTP_QUERY_PARAMS;
+import static fuse.pocs.camel.netty.http.params.NettyTestConfig.HTTP_CONSUMER_URL;
 import static fuse.pocs.camel.netty.http.params.NettyTestConfig.HTTP_QUERY_PARAMS;
 import static fuse.pocs.camel.netty.http.params.NettyTestConfig.RAW_HTTP_QUERY_PARAMS_DECODED;
+import static java.lang.String.format;
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.camel.Exchange.HTTP_QUERY;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
@@ -33,6 +42,9 @@ public class NettyHttpParametersEncodingTest extends Assert {
 
     @Autowired
     MockHttpServer mockHttpServer;
+
+    @EndpointInject(uri = "mock:consumed")
+    MockEndpoint consumingMockEndpoint;
 
     @Before
     public void setUp() {
@@ -68,6 +80,25 @@ public class NettyHttpParametersEncodingTest extends Assert {
         assertEquals(RAW_HTTP_QUERY_PARAMS_DECODED, mockHttpServer.lastRequestUri().getQuery());
     }
 
+    @Test
+    public void shouldConsumeEncodedParameter() throws IOException, InterruptedException {
+        // Given
+        String paramKey = "param";
+        String paramValue = "x1%26y%3D2";
+        String encodedParamValue = encode(paramValue, UTF_8.name());
+        String requestString = format(HTTP_CONSUMER_URL + "?%s=%s", paramKey, encodedParamValue);
+        URL request = new URL(requestString);
+
+        consumingMockEndpoint.expectedMessageCount(1);
+        consumingMockEndpoint.message(0).header(paramKey).isEqualTo(paramValue);
+
+        // When
+        request.openConnection().getInputStream().close();
+
+        // Then
+        consumingMockEndpoint.assertIsSatisfied();
+    }
+
 }
 
 @Configuration
@@ -93,6 +124,14 @@ class NettyTestConfig extends SingleRouteCamelConfiguration {
 
     static final String RAW_NETTY_URI = "netty-http:" + RAW_REQUEST_URL;
 
+    // Consumer routing fixtures
+
+    static final String HTTP_CONSUMER_URL = "http://localhost:11001/";
+
+    static final String NETTY_HTTP_CONSUMER_URI = "netty-http:" + HTTP_CONSUMER_URL;
+
+    // Routes fixtures
+
     @Override
     public RouteBuilder route() {
         return new RouteBuilder() {
@@ -101,6 +140,8 @@ class NettyTestConfig extends SingleRouteCamelConfiguration {
                 from("direct:test").to(NETTY_URI);
 
                 from("direct:test-raw").to(RAW_NETTY_URI);
+
+                from(NETTY_HTTP_CONSUMER_URI).to("mock:consumed");
             }
         };
     }
