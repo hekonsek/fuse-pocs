@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.osgi.framework.BundleContext;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -22,17 +21,12 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDist
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
-//import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
-//import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel.INFO;
 
 @RunWith(PaxExam.class)
 public class PersonServiceTest extends Assert {
 
     @Inject
     PersonService personService;
-
-    @Inject
-    BundleContext context;
 
     @Configuration
     public Option[] commonOptions() {
@@ -57,13 +51,13 @@ public class PersonServiceTest extends Assert {
                         maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
-                mavenBundle("org.hsqldb", "hsqldb", "2.3.1"),
+                mavenBundle().groupId("org.hsqldb").artifactId("hsqldb").versionAsInProject(),
 
-                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.asm", "2.4.2"),
-                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.antlr", "2.4.2"),
-                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa.jpql", "2.4.2"),
-                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.core", "2.4.2"),
-                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa", "2.4.2"),
+                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.asm").versionAsInProject(),
+                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.antlr").versionAsInProject(),
+                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.core").versionAsInProject(),
+                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa").versionAsInProject(),
+                mavenBundle("org.eclipse.persistence", "org.eclipse.persistence.jpa.jpql").versionAsInProject(),
 
                 mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-eclipselink-adapter").versionAsInProject(),
                 mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-eclipselink-bundle").versionAsInProject()

@@ -11,34 +11,11 @@
     <artifactId>fuse-pocs-blueprint-eclipselink-itest</artifactId>
 
     <properties>
-        <exam.version>3.4.0</exam.version>
+        <eclipselink-version>2.4.2</eclipselink-version>
+        <exam-version>3.4.0</exam-version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>fuse-pocs</groupId>
-            <artifactId>fuse-pocs-blueprint-eclipselink-bundle</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>fuse-pocs</groupId>
-            <artifactId>fuse-pocs-blueprint-eclipselink-adapter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-        <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.4.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -53,36 +30,28 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- testing -->
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.1</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-container-karaf</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-junit4</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-container-rbc</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-link-mvn</artifactId>
-            <version>${exam.version}</version>
+            <version>${exam-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -97,10 +66,47 @@
             <version>3.2.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Loaded bundles -->
         <dependency>
-            <groupId>org.ops4j.pax.url</groupId>
-            <artifactId>pax-url-wrap</artifactId>
-            <version>1.6.0</version>
+            <groupId>fuse-pocs</groupId>
+            <artifactId>fuse-pocs-blueprint-eclipselink-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fuse-pocs</groupId>
+            <artifactId>fuse-pocs-blueprint-eclipselink-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.asm</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.antlr</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.core</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.jpql</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
         </dependency>
     </dependencies>
 
