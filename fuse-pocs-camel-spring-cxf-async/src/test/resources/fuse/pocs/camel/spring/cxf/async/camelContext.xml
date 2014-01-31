@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://cxf.apache.org/transports/http-jetty/configuration http://cxf.apache.org/schemas/configuration/http-jetty.xsd
+    ">
+
+    <cxf:rsServer id="customerService" bus="cxf" address="http://localhost:18080"
+                  serviceClass="fuse.pocs.camel.spring.cxf.async.CustomerService"
+                  loggingFeatureEnabled="true" loggingSizeLimit="200">
+    </cxf:rsServer>
+
+    <httpj:engine-factory>
+        <httpj:engine port="18080">
+            <httpj:threadingParameters minThreads="5" maxThreads="5"/>
+        </httpj:engine>
+    </httpj:engine-factory>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <from uri="cxfrs:bean:customerService"/>
+            <threads>
+                <process ref="asynchronousProcessor"/>
+            </threads>
+        </route>
+    </camelContext>
+
+    <bean id="asynchronousProcessor" class="fuse.pocs.camel.spring.cxf.async.AsynchronousProcessor"/>
+
+</beans>
