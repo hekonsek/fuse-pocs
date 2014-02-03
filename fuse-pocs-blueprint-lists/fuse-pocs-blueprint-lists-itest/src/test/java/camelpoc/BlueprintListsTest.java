@@ -44,7 +44,7 @@ public class BlueprintListsTest extends Assert {
 
                 logLevel(LogLevel.INFO),
 
-                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-lists-bundle").version("1.0-SNAPSHOT"),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-lists-bundle").versionAsInProject(),
         };
     }
 

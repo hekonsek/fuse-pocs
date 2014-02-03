@@ -15,7 +15,7 @@
         <!-- We just want Maven build to fail as soon as possible if tested module has not been installed. -->
         <dependency>
             <groupId>fuse-pocs</groupId>
-            <artifactId>fuse-pocs-blueprint-lists</artifactId>
+            <artifactId>fuse-pocs-blueprint-lists-bundle</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -68,5 +68,23 @@
             <version>1.6.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.servicemix.tooling</groupId>
+                <artifactId>depends-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>generate-depends-file</id>
+                        <goals>
+                            <goal>generate-depends-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
