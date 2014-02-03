@@ -11,22 +11,10 @@ import java.io.IOException;
 
 public class XmlNormalizationTest extends CamelTestSupport {
 
+    // Routing fixtures
+
     @EndpointInject(uri = "mock:test")
     MockEndpoint mockEndpoint;
-
-    @Test
-    public void shouldRemoveNewlinesFromElement() throws InterruptedException, IOException {
-        // Given
-        String normalizedMessage = IOUtils.toString(getClass().getResourceAsStream("normalizedAndTokenizedMessage.xml"));
-        mockEndpoint.expectedMinimumMessageCount(1);
-        mockEndpoint.message(0).body().isEqualTo(normalizedMessage);
-
-        // When
-        sendBody("direct:test", getClass().getResourceAsStream("message.xml"));
-
-        // Then
-        assertMockEndpointsSatisfied();
-    }
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
@@ -35,8 +23,25 @@ public class XmlNormalizationTest extends CamelTestSupport {
             public void configure() throws Exception {
                 from("direct:test").
                         bean(XmlElementNormalizationTransformer.class).split().tokenizeXML("Child").
-                        to("mock:test");
+                        to(mockEndpoint);
             }
         };
     }
+
+    // Tests
+
+    @Test
+    public void shouldRemoveNewlinesFromElement() throws InterruptedException, IOException {
+        // Given
+        String normalizedMessage = IOUtils.toString(getClass().getResourceAsStream("normalizedAndTokenizedMessage.xml"));
+
+        // When
+        sendBody("direct:test", getClass().getResourceAsStream("message.xml"));
+
+        // Then
+        String receivedXml = mockEndpoint.getExchanges().get(0).getIn().getBody(String.class);
+        String normalizedReceivedXml = receivedXml.replaceAll("\n", "").replaceAll("\\>\\s+?\\<", "><");
+        assertEquals(normalizedMessage, normalizedReceivedXml);
+    }
+
 }
