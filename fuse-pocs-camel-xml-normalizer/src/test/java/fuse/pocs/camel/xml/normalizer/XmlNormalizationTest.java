@@ -33,7 +33,7 @@ public class XmlNormalizationTest extends CamelTestSupport {
     @Test
     public void shouldRemoveNewlinesFromElement() throws InterruptedException, IOException {
         // Given
-        String normalizedMessage = IOUtils.toString(getClass().getResourceAsStream("normalizedAndTokenizedMessage.xml"));
+        String normalizedMessage = IOUtils.toString(getClass().getResourceAsStream("normalizedAndTokenizedMessage.xml")).replaceAll("\n", "").replaceAll("\\>\\s+?\\<", "><");
 
         // When
         sendBody("direct:test", getClass().getResourceAsStream("message.xml"));
