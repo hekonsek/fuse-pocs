@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fuse-pocs</groupId>
+    <artifactId>fuse-pocs-blueprint-beanvalidator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <camel-version>2.12.2</camel-version>
+        <exam-version>3.4.0</exam-version>
+        <karaf-version>2.3.3</karaf-version>
+    </properties>
+
+    <modules>
+        <module>fuse-pocs-blueprint-beanvalidator-bundle</module>
+        <module>fuse-pocs-blueprint-beanvalidator-itest</module>
+    </modules>
+
+</project>
