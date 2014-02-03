@@ -12,7 +12,6 @@
     <artifactId>fuse-pocs-blueprint-lists-itest</artifactId>
 
     <dependencies>
-        <!-- We just want Maven build to fail as soon as possible if tested module has not been installed. -->
         <dependency>
             <groupId>fuse-pocs</groupId>
             <artifactId>fuse-pocs-blueprint-lists-bundle</artifactId>
