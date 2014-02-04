@@ -8,16 +8,20 @@ import java.util.Set;
 
 public class DefaultValidatorBeanTest extends Assert {
 
-    ValidatorBean defaultValidatorBean = new DefaultValidatorBean();
+    // Fixtures
 
-    Event validEvent = new Event("foo@gmail.com", "bar@gmail.com", "baz@gmail.com");
+    ValidatorBean validatorBean = new DefaultValidatorBean();
 
-    Event invalidEvent = new Event("foo@gmail.com", "foo@gmail.com", "bar@gmail.com", "baz@gmail.com");
+    Event eventWithoutDuplicatedAttendees = new Event("foo@gmail.com", "bar@gmail.com", "baz@gmail.com");
+
+    Event eventWithDuplicatedAttendees = new Event("foo@gmail.com", "foo@gmail.com", "bar@gmail.com", "baz@gmail.com");
+
+    // Tests
 
     @Test
     public void shouldNotReturnValidationErrors() {
         // When
-        Set<ConstraintViolation<Event>> errors = defaultValidatorBean.validateEvent(validEvent);
+        Set<ConstraintViolation<Event>> errors = validatorBean.validateEvent(eventWithoutDuplicatedAttendees);
 
         // Then
         assertEquals(0, errors.size());
@@ -26,7 +30,7 @@ public class DefaultValidatorBeanTest extends Assert {
     @Test
     public void shouldReturnValidationError() {
         // When
-        Set<ConstraintViolation<Event>> errors = defaultValidatorBean.validateEvent(invalidEvent);
+        Set<ConstraintViolation<Event>> errors = validatorBean.validateEvent(eventWithDuplicatedAttendees);
 
         // Then
         assertEquals(1, errors.size());
@@ -35,7 +39,7 @@ public class DefaultValidatorBeanTest extends Assert {
     @Test
     public void shouldInterpolateMessage() {
         // When
-        Set<ConstraintViolation<Event>> errors = defaultValidatorBean.validateEvent(invalidEvent);
+        Set<ConstraintViolation<Event>> errors = validatorBean.validateEvent(eventWithDuplicatedAttendees);
 
         // Then
         assertEquals("Interpolated message!", errors.iterator().next().getMessage());

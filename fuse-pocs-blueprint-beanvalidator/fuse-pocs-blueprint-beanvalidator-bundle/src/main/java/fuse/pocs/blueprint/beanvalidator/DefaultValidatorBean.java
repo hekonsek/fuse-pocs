@@ -14,8 +14,8 @@ public class DefaultValidatorBean implements ValidatorBean {
 
     @Override
     public Set<ConstraintViolation<Event>> validateEvent(Event event) {
-        Configuration<?> configuration = Validation.byDefaultProvider().providerResolver(new HibernateValidationProviderResolver())
-                .configure();
+        Configuration<?> configuration =
+                Validation.byDefaultProvider().providerResolver(new HibernateValidationProviderResolver()).configure();
         PlatformResourceBundleLocator platformResourceBundleLocator = new PlatformResourceBundleLocator("fuse.pocs.blueprint.beanvalidator.ValidationMessages");
         ResourceBundleMessageInterpolator resourceBundleMessageInterpolator = new ResourceBundleMessageInterpolator(platformResourceBundleLocator);
         ValidatorFactory factory = configuration
