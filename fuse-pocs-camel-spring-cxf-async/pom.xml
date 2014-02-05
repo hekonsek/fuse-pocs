@@ -12,7 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <camel.version>2.12.2</camel.version>
+        <camel-version>2.12.2</camel-version>
+        <commons-io-version>1.3.2</commons-io-version>
         <cxf-version>2.7.8</cxf-version>
     </properties>
 
@@ -20,12 +21,12 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cxf</artifactId>
-            <version>${camel.version}</version>
+            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring</artifactId>
-            <version>${camel.version}</version>
+            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -44,14 +45,12 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
-            <version>${camel.version}</version>
-            <scope>test</scope>
+            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.3.2</version>
-            <scope>test</scope>
+            <version>${commons-io-version}</version>
         </dependency>
     </dependencies>
 
