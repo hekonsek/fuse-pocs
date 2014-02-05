@@ -16,6 +16,7 @@ import java.io.File;
 import static org.ops4j.pax.exam.CoreOptions.bundle;
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.vmOption;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
@@ -43,8 +44,8 @@ public class PersonServiceTest extends Assert {
                         .name("Apache Karaf")
                         .unpackDirectory(new File("target/pax"))
                         .useDeployFolder(false),
-
                 keepRuntimeFolder(),
+                vmOption("-Dfile.encoding=UTF-8"), // Workaround for PAXEXAM-595
                 configureConsole().ignoreLocalConsole(),
                 logLevel(LogLevel.INFO),
 
