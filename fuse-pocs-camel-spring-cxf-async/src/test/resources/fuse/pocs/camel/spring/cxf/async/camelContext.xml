@@ -21,10 +21,12 @@
     </httpj:engine-factory>
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <threadPool id="bigPool" poolSize="1000" threadName="Async processor"/>
+
         <route>
             <from uri="cxfrs:bean:customerService"/>
-            <threads>
-                <process ref="asynchronousProcessor"/>
+            <threads executorServiceRef="bigPool">
+            <process ref="asynchronousProcessor"/>
             </threads>
         </route>
     </camelContext>
