@@ -12,6 +12,8 @@ import org.ops4j.pax.exam.junit.PaxExam;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.lang.reflect.Field;
+import java.nio.charset.Charset;
 
 import static org.ops4j.pax.exam.CoreOptions.bundle;
 import static org.ops4j.pax.exam.CoreOptions.maven;
@@ -27,12 +29,14 @@ import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 @RunWith(PaxExam.class)
 public class PersonServiceTest extends Assert {
 
+    // Fixtures
+
     @Inject
     PersonRepository personService;
 
     @Configuration
     public Option[] commonOptions() {
-
+        switchPlatformEncodingToUTF8();
         return new Option[]{
                 karafDistributionConfiguration()
                         .frameworkUrl(
@@ -45,7 +49,7 @@ public class PersonServiceTest extends Assert {
                         .unpackDirectory(new File("target/pax"))
                         .useDeployFolder(false),
                 keepRuntimeFolder(),
-                vmOption("-Dfile.encoding=UTF-8"), // Workaround for PAXEXAM-595
+                vmOption("-Dfile.encoding=UTF-8"),
                 configureConsole().ignoreLocalConsole(),
                 logLevel(LogLevel.INFO),
 
@@ -69,7 +73,7 @@ public class PersonServiceTest extends Assert {
                 bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/1.4_3"),
                 bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1"),
                 bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/3.2.1_3"),
-                bundle("mvn:org.apache.xbean/xbean-asm4-shaded/3.16"),
+                mavenBundle().groupId("org.apache.xbean").artifactId("xbean-asm4-shaded").versionAsInProject(),
                 mavenBundle().groupId("org.apache.openjpa").artifactId("openjpa").versionAsInProject(),
 
                 // Spring Data JPA pseudo-feature
@@ -80,6 +84,8 @@ public class PersonServiceTest extends Assert {
                 mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-openjpa-springdata-bundle").versionAsInProject()
         };
     }
+
+    // Tests
 
     @Test
     public void shouldSavePerson() {
@@ -108,6 +114,22 @@ public class PersonServiceTest extends Assert {
         // Then
         Person loadedPerson = personService.findByName(person.getName());
         assertNull(loadedPerson);
+    }
+
+    // Helpers
+
+    /**
+     * Workaround for PAXEXAM-595 .
+     */
+    private void switchPlatformEncodingToUTF8() {
+        try {
+            System.setProperty("file.encoding", "UTF-8");
+            Field charset = Charset.class.getDeclaredField("defaultCharset");
+            charset.setAccessible(true);
+            charset.set(null, null);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
