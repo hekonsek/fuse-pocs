@@ -14,4 +14,9 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom {
         throw new CustomRollbackException();
     }
 
+    @Override
+    public void commitAfterSave(Person person) {
+        entityManager.persist(person);
+    }
+
 }

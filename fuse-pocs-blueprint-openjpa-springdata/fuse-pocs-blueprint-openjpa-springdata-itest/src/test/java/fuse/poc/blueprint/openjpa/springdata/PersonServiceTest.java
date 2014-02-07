@@ -72,7 +72,7 @@ public class PersonServiceTest extends Assert {
                 bundle("mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/1.2"),
                 bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/1.4_3"),
                 bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1"),
-                bundle("mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/3.2.1_3"),
+                mavenBundle().groupId("org.apache.servicemix.bundles").artifactId("org.apache.servicemix.bundles.commons-collections").versionAsInProject(),
                 mavenBundle().groupId("org.apache.xbean").artifactId("xbean-asm4-shaded").versionAsInProject(),
                 mavenBundle().groupId("org.apache.openjpa").artifactId("openjpa").versionAsInProject(),
 
@@ -114,6 +114,20 @@ public class PersonServiceTest extends Assert {
         // Then
         Person loadedPerson = personService.findByName(person.getName());
         assertNull(loadedPerson);
+    }
+
+    @Test
+    public void shouldCommitPerson() {
+        // Given
+        Person person = new Person("Fred");
+
+        // When
+        personService.commitAfterSave(person);
+
+        // Then
+        Person loadedPerson = personService.findByName(person.getName());
+        assertNotNull(loadedPerson);
+        assertEquals(person.getName(), loadedPerson.getName());
     }
 
     // Helpers

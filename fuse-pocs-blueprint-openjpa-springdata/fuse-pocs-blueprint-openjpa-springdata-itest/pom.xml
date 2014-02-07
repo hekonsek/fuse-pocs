@@ -87,7 +87,12 @@
             <artifactId>openjpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.xbean</groupId>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.commons-collections</artifactId>
+            <version>3.2.1_3</version>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.xbean</groupId>
             <artifactId>xbean-asm4-shaded</artifactId>
             <version>3.16</version>
         </dependency>
