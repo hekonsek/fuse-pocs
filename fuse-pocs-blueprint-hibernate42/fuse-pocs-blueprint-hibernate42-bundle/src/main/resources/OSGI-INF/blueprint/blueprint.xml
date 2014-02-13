@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
+           xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
+
+    <bean id="personService" class="fuse.pocs.blueprint.openjpa.DefaultPersonService">
+        <jpa:context unitname="PERSON"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service interface="fuse.pocs.blueprint.openjpa.PersonService" ref="personService"/>
+
+</blueprint>
