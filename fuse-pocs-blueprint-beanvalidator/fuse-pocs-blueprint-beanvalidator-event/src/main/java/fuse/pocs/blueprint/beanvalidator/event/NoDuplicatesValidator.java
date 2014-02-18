@@ -1,4 +1,4 @@
-package fuse.pocs.blueprint.beanvalidator;
+package fuse.pocs.blueprint.beanvalidator.event;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,5 +1,6 @@
 package fuse.pocs.blueprint.beanvalidator;
 
+import fuse.pocs.blueprint.beanvalidator.event.Event;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +53,8 @@ public class BeanValidatorTest extends Assert {
                                 type("xml").classifier("features").version("2.12.2"),
                         "camel-bean-validator"),
 
-                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-beanvalidator-bundle").versionAsInProject(),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-beanvalidator-engine").versionAsInProject(),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-beanvalidator-event").versionAsInProject(),
         };
     }
 
@@ -61,7 +63,7 @@ public class BeanValidatorTest extends Assert {
     @Test
     public void shouldInjectSingletonList() {
         // When
-        Set<ConstraintViolation<Event>> errors = validatorBean.validateEvent(invalidEvent);
+        Set<ConstraintViolation<Object>> errors = validatorBean.validateEvent(invalidEvent);
 
         // Then
         assertEquals("Interpolated message!", errors.iterator().next().getMessage());

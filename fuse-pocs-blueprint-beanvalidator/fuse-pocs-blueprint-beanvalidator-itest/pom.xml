@@ -15,7 +15,12 @@
         <!-- Bundles to be installed into Karaf -->
         <dependency>
             <groupId>fuse-pocs</groupId>
-            <artifactId>fuse-pocs-blueprint-beanvalidator-bundle</artifactId>
+            <artifactId>fuse-pocs-blueprint-beanvalidator-event</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>fuse-pocs</groupId>
+            <artifactId>fuse-pocs-blueprint-beanvalidator-engine</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

@@ -19,7 +19,8 @@
     </properties>
 
     <modules>
-        <module>fuse-pocs-blueprint-beanvalidator-bundle</module>
+        <module>fuse-pocs-blueprint-beanvalidator-engine</module>
+        <module>fuse-pocs-blueprint-beanvalidator-event</module>
         <module>fuse-pocs-blueprint-beanvalidator-itest</module>
     </modules>
 

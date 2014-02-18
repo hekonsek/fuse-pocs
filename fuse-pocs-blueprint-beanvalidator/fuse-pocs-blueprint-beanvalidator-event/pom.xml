@@ -9,7 +9,7 @@
         <artifactId>fuse-pocs-blueprint-beanvalidator</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>fuse-pocs-blueprint-beanvalidator-bundle</artifactId>
+    <artifactId>fuse-pocs-blueprint-beanvalidator-event</artifactId>
     <packaging>bundle</packaging>
 
     <dependencies>
@@ -44,6 +44,14 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.4.0</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            fuse.pocs.blueprint.beanvalidator.event,
+                            fuse.pocs.blueprint.beanvalidator.messages
+                        </Export-Package>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>

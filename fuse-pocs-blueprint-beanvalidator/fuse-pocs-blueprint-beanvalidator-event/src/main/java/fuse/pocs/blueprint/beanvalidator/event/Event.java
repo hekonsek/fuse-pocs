@@ -1,4 +1,4 @@
-package fuse.pocs.blueprint.beanvalidator;
+package fuse.pocs.blueprint.beanvalidator.event;
 
 import java.util.Arrays;
 import java.util.List;
