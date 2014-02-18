@@ -55,8 +55,8 @@ public class PersonServiceTest extends Assert {
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
 
-                bundle("mvn:org.hsqldb/hsqldb/2.3.0"),
-                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-hibernate42-datasource").version("1.0-SNAPSHOT"),
+                mavenBundle().groupId("org.hsqldb").artifactId("hsqldb").versionAsInProject(),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-hibernate42-datasource").versionAsInProject(),
 
                 bundle("mvn:com.fasterxml/classmate/0.9.0"),
                 bundle("mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0"),
@@ -74,7 +74,7 @@ public class PersonServiceTest extends Assert {
                 mavenBundle().groupId("org.hibernate").artifactId("hibernate-core").versionAsInProject(),
                 mavenBundle().groupId("org.hibernate").artifactId("hibernate-entitymanager").versionAsInProject(),
 
-                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-hibernate42-bundle").version("1.0-SNAPSHOT"),
+                mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-hibernate42-bundle").versionAsInProject(),
 
                 mavenBundle().groupId("org.hibernate").artifactId("hibernate-osgi").versionAsInProject().startLevel(100)
         };
