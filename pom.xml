@@ -11,15 +11,25 @@
 
     <modules>
         <module>fuse-poc-camel-blueprint-dynamictimeout</module>
-        <module>fuse-poc-camel-jms</module>
+        <module>fuse-pocs-camel-jms</module>
         <module>fuse-poc-camel-json-map-simple</module>
-        <module>fuse-poc-camel-xml-normalizer</module>
+        <module>fuse-pocs-camel-xml-normalizer</module>
+        <module>fuse-pocs-camel-correlate-response</module>
+        <module>fuse-pocs-camel-ebcdic</module>
+        <module>fuse-pocs-camel-netty-http-params</module>
+        <module>fuse-pocs-camel-spring-cxf-async</module>
         <module>fuse-pocs-camel-spring-properties</module>
+        <module>fuse-pocs-blueprint-beanvalidator</module>
+        <module>fuse-pocs-blueprint-camel-componentresolver</module>
         <module>fuse-pocs-blueprint-eclipselink</module>
         <module>fuse-pocs-blueprint-eclipselink-interbundletx</module>
         <module>fuse-pocs-blueprint-lists</module>
-        <module>fuse-pocs-blueprint-lists-itest</module>
+        <module>fuse-pocs-blueprint-openjpa</module>
+        <module>fuse-pocs-blueprint-openjpa-springdata</module>
         <module>fuse-pocs-blueprint-hibernate-raw</module>
+        <module>fuse-pocs-blueprint-hibernate42</module>
+        <module>fuse-pocs-fabric</module>
+        <module>fuse-pocs-springdm-springbatch</module>
     </modules>
 
 </project>

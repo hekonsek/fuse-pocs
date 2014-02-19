@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+
+        http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
+
+    <camelContext id="myCamelContext" xmlns="http://camel.apache.org/schema/spring">
+        <template id="producerTemplate"/>
+        <consumerTemplate id="consumerTemplate"/>
+        <route>
+            <from uri="timer://foo?fixedRate=true&amp;period=1s"/>
+            <to uri="seda:batch"/>
+        </route>
+    </camelContext>
+
+    <bean id="camelReader" class="org.apache.camel.component.spring.batch.support.CamelItemReader">
+        <constructor-arg ref="consumerTemplate"/>
+        <constructor-arg value="seda:batch"/>
+    </bean>
+
+    <bean id="camelwriter" class="org.apache.camel.component.spring.batch.support.CamelItemWriter">
+        <constructor-arg ref="producerTemplate"/>
+        <constructor-arg value="mock:test"/>
+    </bean>
+
+    <batch:job id="myJob">
+        <batch:step id="step">
+            <batch:tasklet>
+                <batch:chunk reader="camelReader" writer="camelwriter" commit-interval="1"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+
+    <bean id="jobRepository" class="fuse.pocs.camel.spring.properties.FixedMapJobRepositoryFactoryBean"/>
+
+</beans>
