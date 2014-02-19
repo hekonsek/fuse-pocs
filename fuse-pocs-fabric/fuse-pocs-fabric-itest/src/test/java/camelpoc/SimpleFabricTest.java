@@ -1,6 +1,7 @@
 package camelpoc;
 
 import fuse.pocs.fabric.NettyHttpRoute;
+import io.fabric8.api.Container;
 import io.fabric8.itests.paxexam.support.ContainerBuilder;
 import io.fabric8.itests.paxexam.support.FabricTestSupport;
 import org.apache.commons.io.IOUtils;
@@ -16,6 +17,7 @@ import org.ops4j.pax.exam.spi.reactors.AllConfinedStagedReactorFactory;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Set;
 
 import static java.lang.System.err;
 import static junit.framework.Assert.assertEquals;
@@ -32,9 +34,12 @@ public class SimpleFabricTest extends FabricTestSupport {
         };
     }
 
+    Set<Container> containers;
+
+
     @After
     public void tearDown() throws InterruptedException {
-        ContainerBuilder.destroy();
+        ContainerBuilder.destroy(containers);
     }
 
     @Test
@@ -44,7 +49,7 @@ public class SimpleFabricTest extends FabricTestSupport {
         err.println(executeCommand("fabric:profile-create --parents feature-camel netty-http-server"));
         err.println(executeCommand("fabric:profile-edit --features camel-netty-http netty-http-server"));
         err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0-SNAPSHOT netty-http-server"));
-        ContainerBuilder.create().
+        containers = ContainerBuilder.create().
                 withName("router-container").withProfiles("netty-http-server").
                 assertProvisioningResult().build();
         InputStream inputStream = new URL("http://localhost:18080/").openStream();

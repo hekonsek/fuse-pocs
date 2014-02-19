@@ -29,6 +29,8 @@ import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.ops4j.pax.exam.options.DefaultCompositeOption;
 import org.ops4j.pax.exam.spi.reactors.AllConfinedStagedReactorFactory;
 
+import java.util.Set;
+
 import static io.fabric8.itests.paxexam.support.ContainerBuilder.create;
 import static java.lang.String.format;
 import static org.junit.Assert.assertTrue;
@@ -44,9 +46,11 @@ public class SshTest extends FabricTestSupport {
         };
     }
 
+    Set<Container> containers;
+
     @After
     public void tearDown() throws InterruptedException {
-        ContainerBuilder.destroy();
+        ContainerBuilder.destroy(containers);
     }
 
     @Test
@@ -55,9 +59,10 @@ public class SshTest extends FabricTestSupport {
         System.err.println(executeCommand("fabric:create -n"));
         System.err.println(executeCommand("fabric:profile-create --parents feature-camel netty-http-server"));
         System.err.println(executeCommand("fabric:profile-edit --features camel-netty-http netty-http-server"));
-        System.err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0.0-SNAPSHOT netty-http-server"));
-        Container container = (Container) create().withName("router-container").withProfiles("netty-http-server").
-                assertProvisioningResult().build().iterator().next();
+        System.err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0-SNAPSHOT netty-http-server"));
+        containers = create().withName("router-container").withProfiles("netty-http-server").
+                assertProvisioningResult().build();
+        Container container = containers.iterator().next();
         String[] containerSshUrl = container.getSshUrl().split(":");
         String containerHost = containerSshUrl[0];
         String containerPort = containerSshUrl[1];
