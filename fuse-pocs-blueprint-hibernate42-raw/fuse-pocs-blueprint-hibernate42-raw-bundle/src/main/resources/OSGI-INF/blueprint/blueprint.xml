@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <bean id="personService" class="fuse.pocs.blueprint.openjpa.DefaultPersonService">
+        <argument ref="entityManagerFactory"/>
+    </bean>
+
+    <service interface="fuse.pocs.blueprint.openjpa.PersonService" ref="personService"/>
+
+    <reference id="persistenceProvider" interface="javax.persistence.spi.PersistenceProvider"/>
+
+    <reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"/>
+
+</blueprint>

@@ -28,6 +28,7 @@
         <module>fuse-pocs-blueprint-openjpa-springdata</module>
         <module>fuse-pocs-blueprint-hibernate-raw</module>
         <module>fuse-pocs-blueprint-hibernate42</module>
+        <module>fuse-pocs-blueprint-hibernate42-raw</module>
         <module>fuse-pocs-fabric</module>
         <module>fuse-pocs-springdm-springbatch</module>
     </modules>
