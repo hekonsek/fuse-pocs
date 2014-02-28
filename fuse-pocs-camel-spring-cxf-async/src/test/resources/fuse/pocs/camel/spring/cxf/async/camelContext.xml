@@ -16,12 +16,12 @@
 
     <httpj:engine-factory>
         <httpj:engine port="18080">
-            <httpj:threadingParameters minThreads="5" maxThreads="5"/>
+            <httpj:threadingParameters minThreads="20" maxThreads="20"/>
         </httpj:engine>
     </httpj:engine-factory>
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
-        <threadPool id="bigPool" poolSize="1000" threadName="Async processor"/>
+        <threadPool id="bigPool" maxPoolSize="30" poolSize="30" threadName="Async processor"/>
 
         <route>
             <from uri="cxfrs:bean:customerService"/>

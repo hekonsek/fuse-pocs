@@ -16,7 +16,7 @@ public class AsynchronousProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         LOG.info("Sleeping...");
-        TimeUnit.SECONDS.sleep(30);
+        TimeUnit.SECONDS.sleep(10);
         exchange.getIn().setBody(RESPONSE);
     }
 
