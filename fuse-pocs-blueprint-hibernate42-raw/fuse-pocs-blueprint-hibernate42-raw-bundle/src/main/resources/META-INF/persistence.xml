@@ -9,7 +9,8 @@
 
     <persistence-unit name="PERSON" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DataSource)</jta-data-source>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/DataSource)
+        </non-jta-data-source>
 
         <class>fuse.pocs.blueprint.openjpa.Person</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

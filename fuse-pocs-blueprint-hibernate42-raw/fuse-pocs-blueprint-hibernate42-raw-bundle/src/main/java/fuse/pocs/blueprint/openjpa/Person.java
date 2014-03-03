@@ -3,6 +3,7 @@ package fuse.pocs.blueprint.openjpa;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -14,6 +15,9 @@ public class Person {
     private long id;
 
     private String name;
+
+    @Version
+    long version;
 
     public Person() {
     }
@@ -42,4 +46,5 @@ public class Person {
     public String toString() {
         return name + " " + id;
     }
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/osgi
+    http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <osgi:reference id="osgiEntityManagerFactory" interface="javax.persistence.EntityManagerFactory"/>
+
+    <bean id="entityManagerFactory" class="fuse.pocs.blueprint.openjpa.OsgiEntityManagerWrapperFactoryBean">
+        <constructor-arg ref="osgiEntityManagerFactory"/>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+    </bean>
+
+    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <constructor-arg ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="jpaTransactionManager"/>
+    </bean>
+
+    <bean id="hibernate" class="org.apache.camel.component.jpa.JpaComponent">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <camelContext id="myCamelContext" xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <from uri="hibernate://fuse.pocs.blueprint.openjpa.Person?persistenceUnit=PERSON"/>
+            <to uri="mock:test"/>
+        </route>
+    </camelContext>
+
+</beans>

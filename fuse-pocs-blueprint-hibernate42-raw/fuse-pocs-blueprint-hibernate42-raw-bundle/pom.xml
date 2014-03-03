@@ -14,7 +14,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jpa</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+
+        <dependency>
+        <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
         <dependency>
@@ -40,6 +51,7 @@
                         <!--<JPA-PersistenceUnits>PERSON</JPA-PersistenceUnits>-->
                         <!--<Export-Package>fuse.pocs.blueprint.openjpa</Export-Package>-->
                         <Import-Package>
+                            org.apache.camel.spring.spi,
                             javax.persistence,
                             org.hibernate.proxy,
                             javassist.util.proxy,
@@ -47,7 +59,7 @@
                             org.hsqldb,
                             *
                         </Import-Package>
-                        <!--<DynamicImport-Package>*</DynamicImport-Package>-->
+                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>

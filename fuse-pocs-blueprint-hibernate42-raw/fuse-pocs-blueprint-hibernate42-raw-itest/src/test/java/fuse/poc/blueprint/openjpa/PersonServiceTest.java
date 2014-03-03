@@ -3,6 +3,8 @@ package fuse.poc.blueprint.openjpa;
 import fuse.pocs.blueprint.openjpa.CustomRollbackException;
 import fuse.pocs.blueprint.openjpa.Person;
 import fuse.pocs.blueprint.openjpa.PersonService;
+import org.apache.camel.CamelContext;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +31,9 @@ public class PersonServiceTest extends Assert {
     @Inject
     PersonService personService;
 
+    @Inject
+    CamelContext camelContext;
+
     @Configuration
     public Option[] commonOptions() {
 
@@ -48,10 +53,15 @@ public class PersonServiceTest extends Assert {
                 configureConsole().ignoreLocalConsole(),
                 logLevel(LogLevel.INFO),
 
-
                 features(
                         maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
-                                .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
+                                .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa", "spring-orm"),
+
+                features(
+                        maven().groupId("org.apache.camel.karaf").artifactId("apache-camel").
+                                type("xml").classifier("features").version("2.12.2"),
+                        "camel-spring", "camel-blueprint"
+                ),
 
 
                 mavenBundle().groupId("org.hsqldb").artifactId("hsqldb").versionAsInProject(),
@@ -67,6 +77,9 @@ public class PersonServiceTest extends Assert {
                 bundle("mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final"),
                 bundle("wrap:mvn:org.jboss/jandex/1.1.0.Final"),
                 bundle("mvn:org.jboss.logging/jboss-logging/3.1.3.GA"),
+
+                bundle("mvn:org.apache.camel/camel-jpa/2.12.2"),
+                bundle("mvn:org.apache.camel/camel-spring/2.12.2"),
 
 
                 bundle("mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final"),
@@ -106,6 +119,17 @@ public class PersonServiceTest extends Assert {
         // Then
         Person loadedPerson = personService.findByName(person.getName());
         assertNull(loadedPerson);
+    }
+
+    @Test
+    public void shouldSaveAndReadViaCamel() throws InterruptedException {
+        // Given
+        MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:test", MockEndpoint.class);
+        mockEndpoint.expectedMessageCount(1);
+
+        camelContext.createProducerTemplate().sendBody("hibernate://" + Person.class.getName(), new Person("name"));
+
+        mockEndpoint.assertIsSatisfied();
     }
 
 }
