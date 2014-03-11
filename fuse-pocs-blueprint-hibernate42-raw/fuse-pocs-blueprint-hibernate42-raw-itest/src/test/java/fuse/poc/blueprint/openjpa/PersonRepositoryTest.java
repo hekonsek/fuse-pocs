@@ -1,11 +1,9 @@
 package fuse.poc.blueprint.openjpa;
 
-import fuse.pocs.blueprint.openjpa.CustomRollbackException;
 import fuse.pocs.blueprint.openjpa.Person;
 import fuse.pocs.blueprint.openjpa.PersonService;
 import fuse.pocs.blueprint.openjpa.springdata.PersonRepository;
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +25,7 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 
 @RunWith(PaxExam.class)
-public class PersonServiceTest extends Assert {
+public class PersonRepositoryTest extends Assert {
 
     @Inject
     PersonService personService;
@@ -104,15 +102,15 @@ public class PersonServiceTest extends Assert {
     }
 
     @Test
-    public void shouldSavePerson() {
+    public void shouldSavePerson() throws Exception {
         // Given
-        Person person = new Person("John");
+        Person person = new Person("Mark");
 
         // When
-        personService.save(person);
+        personRepository.save(person);
 
         // Then
-        Person loadedPerson = personService.findByName(person.getName());
+        Person loadedPerson = personRepository.findByName(person.getName());
         assertEquals(person.getName(), loadedPerson.getName());
     }
 
@@ -123,8 +121,8 @@ public class PersonServiceTest extends Assert {
 
         // When
         try {
-            personService.saveAndRollback(person);
-        } catch (CustomRollbackException e) {
+            personRepository.rollbackAfterSave(person);
+        } catch (fuse.pocs.blueprint.openjpa.springdata.CustomRollbackException e) {
         }
 
         // Then
@@ -133,57 +131,17 @@ public class PersonServiceTest extends Assert {
     }
 
     @Test
-    public void shouldSaveAndReadViaCamel() throws InterruptedException {
+    public void shouldCommitPerson() {
         // Given
-        MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:test", MockEndpoint.class);
-        mockEndpoint.expectedMessageCount(1);
+        Person person = new Person("Fred");
 
-        camelContext.createProducerTemplate().sendBody("hibernate://" + Person.class.getName(), new Person("name"));
+        // When
+        personRepository.commitAfterSave(person);
 
-        mockEndpoint.assertIsSatisfied();
+        // Then
+        Person loadedPerson = personService.findByName(person.getName());
+        assertNotNull(loadedPerson);
+        assertEquals(person.getName(), loadedPerson.getName());
     }
-
-//    @Test
-//    public void shouldSavePersonViaRepository() {
-//        // Given
-//        Person person = new Person("Mark");
-//
-//        // When
-//        personRepository.save(person);
-//
-//        // Then
-//        Person loadedPerson = personRepository.findByName(person.getName());
-//        assertEquals(person.getName(), loadedPerson.getName());
-//    }
-
-//    @Test
-//    public void shouldRollbackSave() {
-//        // Given
-//        Person person = new Person("Henry");
-//
-//        // When
-//        try {
-//            personService.rollbackAfterSave(person);
-//        } catch (fuse.pocs.blueprint.openjpa.springdata.CustomRollbackException e) {
-//        }
-//
-//        // Then
-//        Person loadedPerson = personService.findByName(person.getName());
-//        assertNull(loadedPerson);
-//    }
-//
-//    @Test
-//    public void shouldCommitPerson() {
-//        // Given
-//        Person person = new Person("Fred");
-//
-//        // When
-//        personService.commitAfterSave(person);
-//
-//        // Then
-//        Person loadedPerson = personService.findByName(person.getName());
-//        assertNotNull(loadedPerson);
-//        assertEquals(person.getName(), loadedPerson.getName());
-//    }
 
 }

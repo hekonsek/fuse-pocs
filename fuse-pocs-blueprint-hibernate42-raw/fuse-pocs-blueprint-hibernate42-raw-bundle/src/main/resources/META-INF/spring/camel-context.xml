@@ -30,7 +30,7 @@
     </bean>
 
     <camelContext id="myCamelContext" xmlns="http://camel.apache.org/schema/spring">
-        <route>
+        <route id="jpa">
             <from uri="hibernate://fuse.pocs.blueprint.openjpa.Person?persistenceUnit=PERSON"/>
             <to uri="mock:test"/>
         </route>

@@ -67,6 +67,11 @@
             <groupId>fuse-pocs</groupId>
             <artifactId>fuse-pocs-blueprint-hibernate42-raw-datasource</artifactId>
         </dependency>
+        <dependency>
+            <groupId>fuse-pocs</groupId>
+            <artifactId>fuse-pocs-blueprint-hibernate42-raw-springdata</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -89,6 +94,14 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
         </dependency>
     </dependencies>
 
