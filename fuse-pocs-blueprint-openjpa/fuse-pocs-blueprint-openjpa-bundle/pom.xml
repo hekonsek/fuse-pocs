@@ -28,6 +28,7 @@
                     <instructions>
                         <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                         <JPA-PersistenceUnits>PERSON</JPA-PersistenceUnits>
+                        <!--<Dynamic-ImportPackage>*</Dynamic-ImportPackage>-->
                     </instructions>
                 </configuration>
             </plugin>

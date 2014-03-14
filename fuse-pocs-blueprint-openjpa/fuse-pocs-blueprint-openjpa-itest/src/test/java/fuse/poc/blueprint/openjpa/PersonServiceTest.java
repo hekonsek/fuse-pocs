@@ -52,6 +52,7 @@ public class PersonServiceTest extends Assert {
                         maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
+                mavenBundle().groupId("org.apache.tomcat").artifactId("tomcat-jdbc").versionAsInProject(),
                 mavenBundle().groupId("org.hsqldb").artifactId("hsqldb").versionAsInProject(),
 
                 bundle("mvn:org.apache.commons/commons-lang3/3.1"),

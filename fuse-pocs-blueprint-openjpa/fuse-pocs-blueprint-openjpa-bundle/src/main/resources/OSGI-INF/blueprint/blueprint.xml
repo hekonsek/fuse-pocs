@@ -4,10 +4,21 @@
            xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
            xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
-    <bean id="dataSource" class="org.hsqldb.jdbc.JDBCDataSource">
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+          destroy-method="close">
+        <property name="dataSource">
+            <bean class="org.hsqldb.jdbc.JDBCDataSource">
+                <property name="url" value="jdbc:hsqldb:mem:testDB"/>
+                <property name="user" value="sa"/>
+                <property name="password" value=""/>
+            </bean>
+        </property>
         <property name="url" value="jdbc:hsqldb:mem:testDB"/>
-        <property name="user" value="sa"/>
+        <property name="username" value="sa"/>
         <property name="password" value=""/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+        <property name="defaultAutoCommit" value="false"/>
     </bean>
 
     <service ref="dataSource" interface="javax.sql.DataSource">
