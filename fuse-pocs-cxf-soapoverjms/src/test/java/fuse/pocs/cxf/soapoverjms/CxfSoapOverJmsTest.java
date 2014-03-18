@@ -20,8 +20,8 @@ public class CxfSoapOverJmsTest extends Assert {
                 + "?jndiInitialContextFactory"
                 + "=org.apache.activemq.jndi.ActiveMQInitialContextFactory"
                 + "&jndiConnectionFactoryName=ConnectionFactory&jndiURL=tcp://localhost:61500";
-        JaxWsServerFactoryBean serviceFactory = new JaxWsServerFactoryBean();
 
+        JaxWsServerFactoryBean serviceFactory = new JaxWsServerFactoryBean();
         serviceFactory.setServiceClass(HelloService.class);
         serviceFactory.setAddress(address);
         serviceFactory.setTransportId(JMSSpecConstants.SOAP_JMS_SPECIFICATION_TRANSPORTID);
