@@ -19,6 +19,7 @@
         <module>fuse-pocs-camel-netty-http-params</module>
         <module>fuse-pocs-camel-spring-cxf-async</module>
         <module>fuse-pocs-camel-spring-properties</module>
+        <module>fuse-pocs-cxf-soapoverjms</module>
         <module>fuse-pocs-blueprint-beanvalidator</module>
         <module>fuse-pocs-blueprint-camel-componentresolver</module>
         <module>fuse-pocs-blueprint-eclipselink</module>
