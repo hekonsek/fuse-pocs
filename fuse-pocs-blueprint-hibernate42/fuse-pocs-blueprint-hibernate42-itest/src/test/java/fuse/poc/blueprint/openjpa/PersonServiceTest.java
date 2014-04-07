@@ -4,7 +4,6 @@ import fuse.pocs.blueprint.openjpa.CustomRollbackException;
 import fuse.pocs.blueprint.openjpa.Person;
 import fuse.pocs.blueprint.openjpa.PersonService;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -54,6 +53,8 @@ public class PersonServiceTest extends Assert {
                         maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
                                 .classifier("features").version("2.3.3"), "transaction", "jndi", "jpa"),
 
+                mavenBundle().groupId("commons-dbcp").artifactId("commons-dbcp").versionAsInProject(),
+                mavenBundle().groupId("commons-pool").artifactId("commons-pool").version("1.5.4"),
 
                 mavenBundle().groupId("org.hsqldb").artifactId("hsqldb").versionAsInProject(),
                 mavenBundle().groupId("fuse-pocs").artifactId("fuse-pocs-blueprint-hibernate42-datasource").versionAsInProject(),
@@ -93,7 +94,6 @@ public class PersonServiceTest extends Assert {
         assertEquals(person.getName(), loadedPerson.getName());
     }
 
-    @Ignore
     @Test
     public void shouldRollbackSave() {
         // Given
