@@ -2,6 +2,8 @@ package camelpoc;
 
 import fuse.pocs.fabric.NettyHttpRoute;
 import io.fabric8.api.Container;
+import io.fabric8.api.FabricService;
+import io.fabric8.api.ServiceProxy;
 import io.fabric8.itests.paxexam.support.ContainerBuilder;
 import io.fabric8.itests.paxexam.support.FabricTestSupport;
 import org.apache.commons.io.IOUtils;
@@ -44,12 +46,14 @@ public class SimpleFabricTest extends FabricTestSupport {
 
     @Test
     public void shouldCreateCamelRouter() throws Exception {
+        ServiceProxy<FabricService> fabricService = ServiceProxy.createServiceProxy(bundleContext, FabricService.class);
+
         // Given
         err.println(executeCommand("fabric:create -n"));
         err.println(executeCommand("fabric:profile-create --parents feature-camel netty-http-server"));
         err.println(executeCommand("fabric:profile-edit --features camel-netty-http netty-http-server"));
         err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0-SNAPSHOT netty-http-server"));
-        containers = ContainerBuilder.create().
+        containers = ContainerBuilder.create(fabricService).
                 withName("router-container").withProfiles("netty-http-server").
                 assertProvisioningResult().build();
         InputStream inputStream = new URL("http://localhost:18080/").openStream();

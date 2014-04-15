@@ -17,6 +17,8 @@
 package camelpoc;
 
 import io.fabric8.api.Container;
+import io.fabric8.api.FabricService;
+import io.fabric8.api.ServiceProxy;
 import io.fabric8.itests.paxexam.support.ContainerBuilder;
 import io.fabric8.itests.paxexam.support.FabricTestSupport;
 import org.junit.After;
@@ -56,11 +58,12 @@ public class SshTest extends FabricTestSupport {
     @Test
     public void shouldListBundleOnRemoteMachine() throws Exception {
         // Given
+        ServiceProxy<FabricService> fabricService = ServiceProxy.createServiceProxy(bundleContext, FabricService.class);
         System.err.println(executeCommand("fabric:create -n"));
         System.err.println(executeCommand("fabric:profile-create --parents feature-camel netty-http-server"));
         System.err.println(executeCommand("fabric:profile-edit --features camel-netty-http netty-http-server"));
         System.err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0-SNAPSHOT netty-http-server"));
-        containers = create().withName("router-container").withProfiles("netty-http-server").
+        containers = create(fabricService).withName("router-container").withProfiles("netty-http-server").
                 assertProvisioningResult().build();
         Container container = containers.iterator().next();
         String[] containerSshUrl = container.getSshUrl().split(":");

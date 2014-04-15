@@ -17,6 +17,8 @@
 package camelpoc;
 
 import io.fabric8.api.Container;
+import io.fabric8.api.FabricService;
+import io.fabric8.api.ServiceProxy;
 import io.fabric8.itests.paxexam.support.ContainerBuilder;
 import io.fabric8.itests.paxexam.support.FabricTestSupport;
 import org.apache.commons.io.IOUtils;
@@ -40,18 +42,20 @@ public class MasterTest extends FabricTestSupport {
 
     @Test
     public void shouldKeepSingletonNetty() throws Exception {
+        ServiceProxy<FabricService> fabricService = ServiceProxy.createServiceProxy(bundleContext, FabricService.class);
+
         System.err.println(executeCommand("fabric:create -n"));
         System.err.println(executeCommand("fabric:profile-create --parents feature-camel foo"));
         System.err.println(executeCommand("fabric:profile-edit --features camel-netty-http foo"));
         System.err.println(executeCommand("fabric:profile-edit --bundles mvn:fuse-pocs/fuse-pocs-fabric-bundle/1.0-SNAPSHOT foo"));
 
-        Container master = (Container) ContainerBuilder.create().withName("master").withProfiles("foo").assertProvisioningResult().build().iterator().next();
+        Container master = (Container) ContainerBuilder.create(fabricService).withName("master").withProfiles("foo").assertProvisioningResult().build().iterator().next();
 
         InputStream inputStream = new URL("http://localhost:18081/").openStream();
         String response = IOUtils.toString(inputStream);
         assertEquals("master", response);
 
-        Container slave = (Container) ContainerBuilder.create().withName("slave").withProfiles("foo").assertProvisioningResult().build().iterator().next();
+        Container slave = (Container) ContainerBuilder.create(fabricService).withName("slave").withProfiles("foo").assertProvisioningResult().build().iterator().next();
         master.destroy();
 
         inputStream = new URL("http://localhost:18081/").openStream();

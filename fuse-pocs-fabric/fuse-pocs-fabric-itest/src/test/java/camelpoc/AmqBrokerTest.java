@@ -17,6 +17,8 @@
 package camelpoc;
 
 import io.fabric8.api.Container;
+import io.fabric8.api.FabricService;
+import io.fabric8.api.ServiceProxy;
 import io.fabric8.itests.paxexam.support.FabricTestSupport;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.After;
@@ -70,10 +72,12 @@ public class AmqBrokerTest extends FabricTestSupport {
     @Test
     public void shouldCreateAmqBroker() throws Exception {
         // Given
+        ServiceProxy<FabricService> fabricService = ServiceProxy.createServiceProxy(bundleContext, FabricService.class);
+
         String message = "message";
         String queue = "queue";
         System.err.println(executeCommand("fabric:create -n"));
-        containers = create().withName("router-container").withProfiles("mq-amq").
+        containers = create(fabricService).withName("router-container").withProfiles("mq-amq").
                 assertProvisioningResult().build();
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "admin", "discovery:(fabric:default)");
         JmsTemplate jms = new JmsTemplate(connectionFactory);
