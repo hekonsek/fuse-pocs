@@ -10,16 +10,14 @@ then
     exit 1
 fi
 
-rm -rf target
+[ -e target ] && rm -rf target
 mkdir target
 
-unzip $FUSE_INSTALLER -d target/
+unzip -q $FUSE_INSTALLER -d target/
 
 docker build -t fuse/6.1 .
 
 
-echo '=================================================================================================='
-echo 'Successfully created Fuse 6.1 Docker image.'
-echo 'You can execute "docker run -d -t fuse/6.1" to start new Fuse server daemon in the background or'
-echo '"docker run -it fuse/6.1 fuse" to start new Fuse server in the interactive mode (shell).'
-echo '=================================================================================================='
+echo ==================================================================================================
+echo Successfully created Fuse 6.1 Docker image.
+echo ==================================================================================================
