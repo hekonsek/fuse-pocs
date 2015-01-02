@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint default-activation="eager"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.managed.BasicManagedDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>
+        <property name="url" value="jdbc:hsqldb:mem:testDB;hsqldb.sqllog=3;hsqldb.applog=3"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+        <property name="defaultAutoCommit" value="false"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <reference id="transactionManager" interface="javax.transaction.TransactionManager"/>
+
+    <service ref="dataSource" interface="javax.sql.DataSource">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="jdbc/DataSource"/>
+        </service-properties>
+    </service>
+
+</blueprint>
