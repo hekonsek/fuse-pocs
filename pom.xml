@@ -32,7 +32,6 @@
         <module>fuse-pocs-blueprint-hibernate42</module>
         <module>fuse-pocs-blueprint-hibernate42-raw</module>
         <module>fuse-pocs-fabric</module>
-        <module>fuse-pocs-fabric-migration-61</module>
         <module>fuse-pocs-springdm-springbatch</module>
     </modules>
 
