@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>camel-amqp</module>
         <module>hibernate-61</module>
         <module>fuse-poc-camel-blueprint-dynamictimeout</module>
         <module>fuse-pocs-camel-jms</module>
